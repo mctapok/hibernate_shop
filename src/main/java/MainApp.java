@@ -57,6 +57,7 @@ public class MainApp {
             }
         } finally {
             factory.close();
+            assert session != null;
             session.close();
         }
     }
