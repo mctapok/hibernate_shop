@@ -33,7 +33,7 @@ public class MainApp {
                     session = factory.getCurrentSession();
                     session.beginTransaction();
                     Customer customer = (Customer) session
-                            .createQuery("FROM * Customer Customer WHERE Customer.name = :name")
+                            .createQuery("FROM * Customer customer WHERE customer.name = :name")
                             .setParameter("name", commandParts[1])
                             .getSingleResult();
                     List<Order> orderList = customer.getOrder();
@@ -49,16 +49,27 @@ public class MainApp {
                             .createQuery("FROM Product product WHERE product.name = :name")
                             .setParameter("name", commandParts[1]).getSingleResult();
                     orderList = product.getOrders();
-                    orderList.forEach(c-> System.out.println(product.getName() +
+                    orderList.forEach(c -> System.out.println(product.getName() +
                             " купили :" + c.getCustomer().toString()));
+                    break;
+                case "/removeCustomer":
+                    System.out.println("delete Customer");
+                    session = factory.getCurrentSession();
+                    session.beginTransaction();
+                    customer = (Customer) session
+                            .createQuery("FROM Customer customer WHERE customer.name =:name")
+                            .setParameter("name", commandParts[1]).getSingleResult();
+                    System.out.println(customer.toString());
+                    session.createQuery("delete FROM Customer WHERE id =:id")
+                            .setParameter("id", customer.getId()).executeUpdate();
                     break;
                 case "exit":
                     break;
             }
         } finally {
-            factory.close();
             assert session != null;
             session.close();
+            factory.close();
         }
     }
 }
