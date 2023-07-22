@@ -1,1 +1,2 @@
-INSERT INTO customers (name) VALUES ('Gendalf'), ('Frodo');
+INSERT INTO customers (name) VALUES ('Gendalf'), ('Frodo'), ('Aragorn'), ('Boromir'), ('Sam'), ('Merry'), ('Pippin'), ('Gimli'), ('Legolas');
+INSERT INTO product (name, price) VALUES ('staff', 84575), ('pan', 99999), ('sword', 50990), ('axe', 6540), ('bow', 1000), ('shield', 3400), ('bread', 5), ('saloninka', 99), ('tabak', 299);
