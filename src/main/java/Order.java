@@ -23,6 +23,22 @@ public class Order {
             return productId == id.productId && customerId == id.customerId;
         }
 
+        public int getProductId() {
+            return productId;
+        }
+
+        public void setProductId(int productId) {
+            this.productId = productId;
+        }
+
+        public int getCustomerId() {
+            return customerId;
+        }
+
+        public void setCustomerId(int customerId) {
+            this.customerId = customerId;
+        }
+
         @Override
         public int hashCode() {
             return productId + customerId;
@@ -32,11 +48,11 @@ public class Order {
     @EmbeddedId
     private Id id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", insertable=false, updatable=false)
     private Product product;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", insertable=false, updatable=false)
     private Customer customer;
 
@@ -77,6 +93,6 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order " + id + "customer " + customer + " product " + product;
+        return "Order " + id + "customer " + customer + " product " + product + "price " + price;
     }
 }
